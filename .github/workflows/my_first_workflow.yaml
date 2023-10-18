@@ -14,6 +14,10 @@ jobs:
       id: get_date_in_github
       run: echo "date in github $(date)"
 
+    - name: checkout my source
+      id: checkout_my_soruce
+      uses: actions/checkout@v4
+
     - name: list directory
       id: list_directory
       run: echo "$(ls-l)"
@@ -22,9 +26,9 @@ jobs:
       id: echo_github_context
       run: echo "ref_name ${{github.ref_name}}\n repository ${{github.repository}}\n owner ${{github.repository_owner}}"
 
-    - name: print sentence
-      id: print_sentence
-      run: echo "papipopeto pipipeti"
+    - name: fail the job
+      id: fail_the_job
+      run: exit 0
 
     - name: Send Mail
       id: send_mail
@@ -38,3 +42,5 @@ jobs:
         subject: "Github Workflow from ${{github.ref_name}}"
         body: "The job is ${{job.status}}"
         from: kampai@gmail.com
+        attachments: main.js
+    
